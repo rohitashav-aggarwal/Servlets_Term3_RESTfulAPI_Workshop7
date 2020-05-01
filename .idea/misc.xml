@@ -13,5 +13,8 @@
       </list>
     </option>
   </component>
+  <component name="ProjectResources">
+    <resource url="https://use.fontawesome.com/releases/v5.5.0/css/all.css" location="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

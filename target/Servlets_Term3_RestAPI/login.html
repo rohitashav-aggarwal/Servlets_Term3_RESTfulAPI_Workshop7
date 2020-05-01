@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script>
+        async function login() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let url = 'http://localhost:9493/Servlets_Term3_RESTfulAPI_Workshop7_war_exploded/api/loginuser';
+            let successUrl = 'http://localhost:9493/Servlets_Term3_RESTfulAPI_Workshop7_war_exploded/loggedUser.html';
+            var token = username+ ":"+ password;
+            var hash  = btoa(token);
+            let response = await fetch(url, {
+                headers: {
+                    Authorization: "basic " + hash
+                }
+            });
+            if (response.status === 200 || response.ok ) {
+                window.location.assign(successUrl);
+                localStorage.setItem("username", username);
+            } else {
+                alert("Username or password are incorrect.");
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="login-box">
+    <h1>Login</h1>
+    <form method="get" onsubmit="login()">
+        <div class="textbox">
+            <input id="username" type="text" placeholder="Username">
+        </div>
+
+        <div class="textbox">
+            <input id="password" type="password" placeholder="Password">
+        </div>
+
+        <input type="button" class="btn" value="Sign in" onclick="login()">
+    </form>
+</div>
+</body>
+</html>
