@@ -18,25 +18,8 @@ import javax.ws.rs.core.Response;
 @Path("/api")
 public class RegistrationRestService {
 
-    EntityManagerFactory factory
-            = Persistence.createEntityManagerFactory("Travel");
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("Travel");
 
-    @GET
-    @Produces("text/plain")
-    public String getClichedMessage() {
-        return "Hello World";
-    }
-
-    @GET
-    @Path("/getusers")
-    @Produces("Application/json")
-    public String Users() {
-        EntityManager em = factory.createEntityManager();
-        Query query = em.createQuery("select u from UsersEntity u");
-        List<UsersEntity> list = query.getResultList();
-        Gson gson = new Gson();
-        return gson.toJson(list);
-    }
 
     @GET
     @Path("/loginuser")
@@ -66,6 +49,33 @@ public class RegistrationRestService {
         }else{
             return Response.ok().build();
         }
+    }
+
+    @PUT
+    @Path("/registeragent")
+    public void putCustomer(String jsonString) {
+
+//        CustomersEntity customersEntity =  new CustomersEntity();
+//        customersEntity.setCustFirstName("first1");
+//        customersEntity.setCustLastName("last2");
+//        customersEntity.setCustAddress("address");
+//        customersEntity.setCustCity("city");
+//        customersEntity.setCustProv("AB");
+//        customersEntity.setCustPostal("postal");
+//        customersEntity.setCustCountry("country");
+//        customersEntity.setCustHomePhone("4035555555");
+//        customersEntity.setCustBusPhone("4035555555");
+//        customersEntity.setCustEmail("email@gmail.com");
+//        UsersEntity usersEntity = new UsersEntity();
+//        usersEntity.setUsername("user1");
+//        usersEntity.setPassword("password1");
+//        customersEntity.setUsersEntity(usersEntity);
+//        EntityManager em = factory.createEntityManager();
+//        em.getTransaction().begin();
+//        em.persist(customersEntity);
+//        em.getTransaction().commit();
+//        em.close();
+//        factory.close();
     }
 
 }

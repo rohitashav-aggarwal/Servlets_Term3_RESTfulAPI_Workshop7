@@ -3,12 +3,25 @@ package Entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "customers", schema = "travelexperts", catalog = "")
+@Table(name = "customers", schema = "travelexperts")
 public class CustomersEntity {
 
     @Id
     @Column(name = "CustomerId", nullable = false)
     private int customerId;
+
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "userid")
+    private UsersEntity usersEntity;
+
+    public UsersEntity getUsersEntity() {
+        return usersEntity;
+    }
+
+    public void setUsersEntity(UsersEntity usersEntity) {
+        this.usersEntity = usersEntity;
+    }
 
     @Basic
     @Column(name = "CustFirstName", nullable = false, length = 25)

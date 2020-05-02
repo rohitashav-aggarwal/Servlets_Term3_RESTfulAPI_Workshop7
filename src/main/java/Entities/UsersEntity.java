@@ -3,15 +3,12 @@ package Entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users", schema = "travelexperts", catalog = "")
+@Table(name = "Users", schema = "travelexperts")
 public class UsersEntity {
     @Id
     @Column(name = "UserId", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
-
-    @Basic
-    @Column(name = "CustomerId", nullable = false)
-    private int customerId;
 
     @Basic
     @Column(name = "Username", nullable = false, length = 20)
@@ -30,14 +27,6 @@ public class UsersEntity {
         this.userId = userId;
     }
 
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
 
 
     public String getUsername() {
