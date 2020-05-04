@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    /*background-image: url('../images/paris.jpg');*/
+    background-image: url('../images/paris.jpg');
     background-size: cover;
 }
 

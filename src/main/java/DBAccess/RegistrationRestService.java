@@ -4,8 +4,8 @@ import Entities.CustomersEntity;
 import Entities.UsersEntity;
 import com.google.gson.Gson;
 import sun.misc.BASE64Decoder;
-
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -51,31 +51,43 @@ public class RegistrationRestService {
         }
     }
 
-    @PUT
-    @Path("/registeragent")
-    public void putCustomer(String jsonString) {
+    @POST
+    @Path("/registeruser")
+    public void putCustomer(@HeaderParam("firstName") String firstname,
+                            @HeaderParam("lastName") String lastname,
+                            @HeaderParam("address") String address,
+                            @HeaderParam("city") String city,
+                            @HeaderParam("province") String province,
+                            @HeaderParam("postal") String postal,
+                            @HeaderParam("country") String country,
+                            @HeaderParam("homephone") String homephone,
+                            @HeaderParam("busphone") String busphone,
+                            @HeaderParam("email") String email,
+                            @HeaderParam("username") String username,
+                            @HeaderParam("password") String password
+                            ) {
 
-//        CustomersEntity customersEntity =  new CustomersEntity();
-//        customersEntity.setCustFirstName("first1");
-//        customersEntity.setCustLastName("last2");
-//        customersEntity.setCustAddress("address");
-//        customersEntity.setCustCity("city");
-//        customersEntity.setCustProv("AB");
-//        customersEntity.setCustPostal("postal");
-//        customersEntity.setCustCountry("country");
-//        customersEntity.setCustHomePhone("4035555555");
-//        customersEntity.setCustBusPhone("4035555555");
-//        customersEntity.setCustEmail("email@gmail.com");
-//        UsersEntity usersEntity = new UsersEntity();
-//        usersEntity.setUsername("user1");
-//        usersEntity.setPassword("password1");
-//        customersEntity.setUsersEntity(usersEntity);
-//        EntityManager em = factory.createEntityManager();
-//        em.getTransaction().begin();
-//        em.persist(customersEntity);
-//        em.getTransaction().commit();
-//        em.close();
-//        factory.close();
+        CustomersEntity customersEntity =  new CustomersEntity();
+        customersEntity.setCustFirstName(firstname);
+        customersEntity.setCustLastName(lastname);
+        customersEntity.setCustAddress(address);
+        customersEntity.setCustCity(city);
+        customersEntity.setCustProv(province);
+        customersEntity.setCustPostal(postal);
+        customersEntity.setCustCountry(country);
+        customersEntity.setCustHomePhone(homephone);
+        customersEntity.setCustBusPhone(busphone);
+        customersEntity.setCustEmail(email);
+        UsersEntity usersEntity = new UsersEntity();
+        usersEntity.setUsername(username);
+        usersEntity.setPassword(password);
+        customersEntity.setUsersEntity(usersEntity);
+        EntityManager em = factory.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(customersEntity);
+        em.getTransaction().commit();
+        em.close();
+        factory.close();
     }
 
 }
