@@ -2,14 +2,7 @@ package DBAccess;
 
 import Entities.CustomersEntity;
 import Entities.UsersEntity;
-import com.google.gson.Gson;
-import org.hibernate.service.spi.InjectService;
 import sun.misc.BASE64Decoder;
-
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.util.List;
-import javax.json.JsonObjectBuilder;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -17,6 +10,8 @@ import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.util.List;
 
 @Path("/api")
 public class RegistrationRestService {
@@ -104,9 +99,7 @@ public class RegistrationRestService {
         finally {
             em.close();
             factory.close();
-            return Response.ok().build();
         }
-
+        return Response.ok().build();
     }
-
 }
