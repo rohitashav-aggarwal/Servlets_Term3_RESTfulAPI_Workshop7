@@ -3,10 +3,13 @@ package DBAccess;
 import Entities.CustomersEntity;
 import Entities.UsersEntity;
 import com.google.gson.Gson;
+import org.hibernate.service.spi.InjectService;
 import sun.misc.BASE64Decoder;
+
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.List;
+import javax.json.JsonObjectBuilder;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -20,8 +23,14 @@ public class RegistrationRestService {
 
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("Travel");
 
-
     @GET
+    @Path("/testapi")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getusers() {
+        return "From rest service to android.";
+    }
+
+    @POST
     @Path("/loginuser")
     @Produces("Application/json")
     public Response authenticateUser(@HeaderParam("authorization") String authString) {
@@ -44,16 +53,17 @@ public class RegistrationRestService {
         query.setParameter(1, username);
         query.setParameter(2, password);
         List<UsersEntity> list = query.getResultList();
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             return Response.status(404).build();
-        }else{
+        } else {
             return Response.ok().build();
         }
     }
 
+
     @POST
     @Path("/registeruser")
-    public void putCustomer(@HeaderParam("firstName") String firstname,
+    public Response putCustomer(@HeaderParam("firstName") String firstname,
                             @HeaderParam("lastName") String lastname,
                             @HeaderParam("address") String address,
                             @HeaderParam("city") String city,
@@ -65,29 +75,38 @@ public class RegistrationRestService {
                             @HeaderParam("email") String email,
                             @HeaderParam("username") String username,
                             @HeaderParam("password") String password
-                            ) {
-
-        CustomersEntity customersEntity =  new CustomersEntity();
-        customersEntity.setCustFirstName(firstname);
-        customersEntity.setCustLastName(lastname);
-        customersEntity.setCustAddress(address);
-        customersEntity.setCustCity(city);
-        customersEntity.setCustProv(province);
-        customersEntity.setCustPostal(postal);
-        customersEntity.setCustCountry(country);
-        customersEntity.setCustHomePhone(homephone);
-        customersEntity.setCustBusPhone(busphone);
-        customersEntity.setCustEmail(email);
-        UsersEntity usersEntity = new UsersEntity();
-        usersEntity.setUsername(username);
-        usersEntity.setPassword(password);
-        customersEntity.setUsersEntity(usersEntity);
+    ) {
         EntityManager em = factory.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(customersEntity);
-        em.getTransaction().commit();
-        em.close();
-        factory.close();
+        try {
+            CustomersEntity customersEntity = new CustomersEntity();
+            customersEntity.setCustFirstName(firstname);
+            customersEntity.setCustLastName(lastname);
+            customersEntity.setCustAddress(address);
+            customersEntity.setCustCity(city);
+            customersEntity.setCustProv(province);
+            customersEntity.setCustPostal(postal);
+            customersEntity.setCustCountry(country);
+            customersEntity.setCustHomePhone(homephone);
+            customersEntity.setCustBusPhone(busphone);
+            customersEntity.setCustEmail(email);
+            UsersEntity usersEntity = new UsersEntity();
+            usersEntity.setUsername(username);
+            usersEntity.setPassword(password);
+            customersEntity.setUsersEntity(usersEntity);
+            em.getTransaction().begin();
+            em.persist(customersEntity);
+            em.getTransaction().commit();
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            return Response.status(404).build();
+        }
+        finally {
+            em.close();
+            factory.close();
+            return Response.ok().build();
+        }
+
     }
 
 }

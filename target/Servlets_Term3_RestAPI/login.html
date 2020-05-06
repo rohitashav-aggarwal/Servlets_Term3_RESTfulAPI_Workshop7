@@ -13,6 +13,7 @@
             var token = username+ ":"+ password;
             var hash  = btoa(token);
             let response = await fetch(url, {
+                method: "POST",
                 headers: {
                     Authorization: "basic " + hash
                 }

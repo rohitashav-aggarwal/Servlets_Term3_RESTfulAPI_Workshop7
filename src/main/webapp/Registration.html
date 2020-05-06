@@ -5,13 +5,6 @@
     <title>Registration</title>
     <link rel="stylesheet" href="styles/style.css">
     <script>
-        function validateForm(){
-            var x = document.forms["myform"]["country"].value;
-            if(x == ""){
-                alert("Country must not be empty");
-                return false;
-            }
-        }
         async function postData(){
             const firstName = document.getElementById("fName").value;
             const lastName = document.getElementById("lName").value;
@@ -30,7 +23,7 @@
             let response = await fetch(url, {
                 method: 'POST',
                 headers :{firstName: firstName, lastName: lastName, address: address_user, city: city, province: province,
-                          postal: postalCode, country: country, homephone: homePhone, busphone: busPhone, email: email, username: username, password:password
+                    postal: postalCode, country: country, homephone: homePhone, busphone: busPhone, email: email, username: username, password:password
                 }
             });
             if (response.status === 200 || response.ok ) {
@@ -45,7 +38,7 @@
 <body>
 <div class="login-box">
     <h1>Register</h1>
-    <form method="post" name="myform" id="postData" onsubmit="return validateForm()">
+    <form method="post" name="myform" id="postData">
         <div class="textbox">
             <input id="fName" type="text" placeholder="First Name" required>
         </div>
