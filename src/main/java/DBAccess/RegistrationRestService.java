@@ -1,12 +1,12 @@
 package DBAccess;
 
 import Entities.CustomersEntity;
+import Entities.PackagesEntity;
 import Entities.UsersEntity;
+import com.google.gson.Gson;
 import sun.misc.BASE64Decoder;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+
+import javax.persistence.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -101,5 +101,52 @@ public class RegistrationRestService {
             factory.close();
         }
         return Response.ok().build();
+    }
+
+    @GET
+    @Path("/getCustomer")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String getCustomer(@HeaderParam("username") String username){
+        EntityManager em = factory.createEntityManager();
+        Query query = em.createQuery("SELECT DISTINCT c FROM CustomersEntity c INNER JOIN c.usersEntity u where u.username = ?1");
+        query.setParameter(1, username);
+        List<CustomersEntity> list = query.getResultList();
+        Gson gson = new Gson();
+        return gson.toJson(list.get(0));
+    }
+
+    @POST
+    @Path("/updateCustomer")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateCustomer(@HeaderParam("id") int id,
+                                   @HeaderParam("firstName") String firstname,
+                                   @HeaderParam("email") String email,
+                                   @HeaderParam("username") String username,
+                                   @HeaderParam("password") String password){
+
+        EntityManager em = factory.createEntityManager();
+        CustomersEntity customersEntity = em.find(CustomersEntity.class, id);
+
+        em.getTransaction().begin();
+        customersEntity.setCustFirstName(firstname);
+        customersEntity.setCustEmail(email);
+        customersEntity.getUsersEntity().setUsername(username);
+        customersEntity.getUsersEntity().setPassword(password);
+        em.persist(customersEntity);
+        em.getTransaction().commit();
+    }
+
+    @GET
+    @Path("/getPackages")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String getPackages(){
+        EntityManager em = factory.createEntityManager();
+        Query query = em.createQuery("SELECT p FROM PackagesEntity p", PackagesEntity.class);
+        List<PackagesEntity> results = query.getResultList();
+        Gson gson = new Gson();
+        return gson.toJson(results);
     }
 }
