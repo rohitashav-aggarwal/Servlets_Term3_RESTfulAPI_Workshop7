@@ -1,3 +1,8 @@
+/*
+Author - Rohit
+Servlets + Android Rest Services
+ */
+
 package DBAccess;
 
 import Entities.CustomersEntity;
@@ -149,4 +154,5 @@ public class RegistrationRestService {
         Gson gson = new Gson();
         return gson.toJson(results);
     }
+
 }
