@@ -98,34 +98,4 @@ public class PackagesEntity {
         this.pkgAgencyCommission = pkgAgencyCommission;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        PackagesEntity that = (PackagesEntity) o;
-//
-//        if (packageId != that.packageId) return false;
-//        if (pkgName != null ? !pkgName.equals(that.pkgName) : that.pkgName != null) return false;
-//        if (pkgStartDate != null ? !pkgStartDate.equals(that.pkgStartDate) : that.pkgStartDate != null) return false;
-//        if (pkgEndDate != null ? !pkgEndDate.equals(that.pkgEndDate) : that.pkgEndDate != null) return false;
-//        if (pkgDesc != null ? !pkgDesc.equals(that.pkgDesc) : that.pkgDesc != null) return false;
-//        if (pkgBasePrice != null ? !pkgBasePrice.equals(that.pkgBasePrice) : that.pkgBasePrice != null) return false;
-//        if (pkgAgencyCommission != null ? !pkgAgencyCommission.equals(that.pkgAgencyCommission) : that.pkgAgencyCommission != null)
-//            return false;
-//
-//        return true;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = packageId;
-//        result = 31 * result + (pkgName != null ? pkgName.hashCode() : 0);
-//        result = 31 * result + (pkgStartDate != null ? pkgStartDate.hashCode() : 0);
-//        result = 31 * result + (pkgEndDate != null ? pkgEndDate.hashCode() : 0);
-//        result = 31 * result + (pkgDesc != null ? pkgDesc.hashCode() : 0);
-//        result = 31 * result + (pkgBasePrice != null ? pkgBasePrice.hashCode() : 0);
-//        result = 31 * result + (pkgAgencyCommission != null ? pkgAgencyCommission.hashCode() : 0);
-//        return result;
-//    }
 }
