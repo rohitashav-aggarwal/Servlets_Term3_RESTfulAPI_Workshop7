@@ -8,8 +8,8 @@
         async function login() {
             let username = document.getElementById("username").value;
             let password = document.getElementById("password").value;
-            let url = 'http://localhost:9493/Servlets_Term3_RESTfulAPI_Workshop7_war_exploded/api/loginuser';
-            let successUrl = 'http://localhost:9493/Servlets_Term3_RESTfulAPI_Workshop7_war_exploded/loggedUser.html';
+            let url = 'http://localhost:8080/Servlets_Term3_RESTfulAPI_Workshop7_war_exploded/api/loginuser';
+            let successUrl = 'http://localhost:8080/Servlets_Term3_RESTfulAPI_Workshop7_war_exploded/loggedUser.html';
             var token = username+ ":"+ password;
             var hash  = btoa(token);
             let response = await fetch(url, {

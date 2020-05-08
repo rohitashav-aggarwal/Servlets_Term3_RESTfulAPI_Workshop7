@@ -19,9 +19,9 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3308/travelexperts?characterEncoding=utf8"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/travelexperts?characterEncoding=utf8"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.jdbc.password" value="test"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
 <!--            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3308/travelexperts"/>-->
 <!--            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>-->
