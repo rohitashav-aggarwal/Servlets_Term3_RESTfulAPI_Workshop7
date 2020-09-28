@@ -21,7 +21,7 @@ import java.util.List;
 @Path("/api")
 public class RegistrationRestService {
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("Travel");
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("Servlets_Term3_RESTfulAPI_Workshop7");
 
     @GET
     @Path("/testapi")
